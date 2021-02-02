@@ -3,15 +3,15 @@
 source ./.config
 
 #Variáveis
-declare -ri true=1
-declare -ri false=0
+typeset -ri true=1
+typeset -ri false=0
 
 #Criar grupo
 function create-group () {
 
     typeset -r group="${1}"
 
-    exec groupadd -f "${group}"
+    groupadd -f "${group}"
 
 }
 
@@ -20,7 +20,7 @@ function delete-group () {
 
     typeset -r group="${1}"
 
-    exec groupdel -f "${group}"
+    groupdel -f "${group}"
 
 }
 
