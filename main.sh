@@ -5,7 +5,7 @@ declare -ri true=1
 declare -ri false=0
 
 #Criar grupo
-function create-grp () {
+function create-group () {
 
     typeset -r group="${1}"
 
@@ -14,7 +14,7 @@ function create-grp () {
 }
 
 #Deletar grupo
-function delete-grp () {
+function delete-group () {
 
     typeset -r group="${1}"
 
@@ -23,7 +23,7 @@ function delete-grp () {
 }
 
 #Checar grupo
-function check-grp () {
+function check-group () {
 
     typeset -r group="${1}"
 
@@ -39,17 +39,15 @@ function check-grp () {
 function main () {
     for group in "${!groups[@]}";
     do
-        if ("${check-grp}" "${group}" )
+        if $(check-group ${group}) 
         then
             if [[ "${groups[${group}]}" == "create" ]]
             then
-                #create-grp "${group}";
-                echo 1;
-            if [["${groups[${group}]}" == "delete"]]
-            then
-                #delete-grp "${group}";
-                echo 2;
+                create-group "${group}";
             fi
+        elif [[ "${groups[${group}]}" == "delete" ]]
+        then
+            delete-group "${group}";
         fi
     done
 }
